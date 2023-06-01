@@ -27,34 +27,16 @@ class Formate {
       "ноября",
       "декабря",
     ];
-    // const month = new Date(time * 1000).getMonth();
     return `${date} ${monthNames[new Date(time * 1000).getMonth()]}`;
   }
 
   dayWeek(day: number) {
-    const days = [
-      "Воскресенье",
-      "Понедельник",
-      "Вторник",
-      "Среда",
-      "Четверг",
-      "Пятница",
-      "Суббота",
-    ];
+    const days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
     return days[new Date(day * 1000).getDay()];
   }
   // Вероятность осадков для недельного прогноза
   precipitation = (precipitation: number) =>
     `${Math.round(precipitation * 100)}%`;
-
-  formateDayWeek = (dayArr: string[], monthArr: string[]): string => {
-    const date = new Date();
-    const day = dayArr[date.getDay()];
-    const dayMonth = date.getDate();
-    const month = monthArr[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day}, ${dayMonth} ${month} ${year}`;
-  };
 }
 
 const formate = new Formate();

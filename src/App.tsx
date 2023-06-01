@@ -1,48 +1,43 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { shallow } from "zustand/shallow";
+import { useEffect } from "react";
 import { Box, Grid } from "@chakra-ui/react";
-import { getCurrentCoordinates } from "./service";
 import WeatherCardRight from "./components/WeatherCardRight";
 import WeatherCardLeft from "./components/WeatherCardLeft";
+import { useCurrentWeatherData } from "./store/CurrentWeatherData";
+import { useCurrentCoordinates } from "./hook/useCurrentCoordinates";
+import formate from "./service";
 
 function App() {
-  const [data, setData] = useState();
+  const { getCurrentCoordinates } = useCurrentCoordinates();
+  const { fetchCurrentWeatherData } = useCurrentWeatherData(
+    (state) => ({
+      loading: state.loading,
+      error: state.error,
+      fetchCurrentWeatherData: state.fetchCurrentWeatherData,
+    }),
+    shallow
+  );
 
-  async function сurrentWeatherAPI(latitude: number, longitude: number) {
-    const response = await axios({
-      url: "https://api.openweathermap.org/data/2.5/weather",
-      params: {
-        lat: latitude,
-        lon: longitude,
-        units: "metric",
-        lang: "ru",
-        appid: import.meta.env.VITE_API_KEY,
-      },
-      timeout: 10000,
-    });
-    return response.data;
-  }
+  console.log(new Date().getDay());
 
-  async function fetchWeather() {
+  console.log(formate.dayWeek(Number(new Date())));
+
+  const getCurrentWeatherData = async () => {
     try {
       const position = await getCurrentCoordinates();
       if (position) {
-        console.log(position.latitude, position.longitude);
-        const res = await сurrentWeatherAPI(
-          position.latitude,
-          position.longitude
-        );
-        setData(res);
+        await fetchCurrentWeatherData(position.latitude, position.longitude);
       }
-      return null;
+      console.log("getCurrentWeatherData отработала успешно");
     } catch (error) {
       console.error("Ошибка получения координат:", error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchWeather();
+    getCurrentWeatherData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
