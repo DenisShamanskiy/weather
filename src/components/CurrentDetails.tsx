@@ -1,6 +1,9 @@
 import { Box, ListItem, UnorderedList, Text } from "@chakra-ui/react";
+import { useCurrentWeatherData } from "../store/CurrentWeatherData";
+import formate from "../utils/formate";
 
-function CurrentDetails() {
+const CurrentDetails = () => {
+  const current = useCurrentWeatherData((state) => state.info.current);
   return (
     <Box
       m={5}
@@ -19,25 +22,28 @@ function CurrentDetails() {
         display="flex"
         flexDirection="column"
       >
-        <ListItem display="flex" justifyContent="space-between">
-          <Text>Cloudy</Text>
-          <Text>86%</Text>
+        <ListItem
+          display="flex"
+          justifyContent="space-between"
+          overflow="hidden"
+          textOverflow="ellipsis"
+          whiteSpace="nowrap"
+        >
+          <Text>Давление</Text>
+          <Text>{formate.pressure(current.pressure)}</Text>
         </ListItem>
         <ListItem display="flex" justifyContent="space-between">
-          <Text>Humidity</Text>
-          <Text>62%</Text>
+          <Text>Ветер</Text>
+          <Text>{Math.round(current.wind_speed)} м.с.</Text>
+          {/* <Text>{formate.windDirection(current.wind_deg)}</Text> */}
         </ListItem>
         <ListItem display="flex" justifyContent="space-between">
-          <Text>Wind</Text>
-          <Text>8km/h</Text>
-        </ListItem>
-        <ListItem display="flex" justifyContent="space-between">
-          <Text>Rain</Text>
-          <Text>8mm</Text>
+          <Text>Влажность</Text>
+          <Text>{current.humidity}%</Text>
         </ListItem>
       </UnorderedList>
     </Box>
   );
-}
+};
 
 export default CurrentDetails;

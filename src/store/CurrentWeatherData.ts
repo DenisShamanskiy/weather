@@ -1,11 +1,13 @@
-import axios from "axios";
 import { create } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { CurrentWeatherDataResponse } from "../types/store";
+import { General } from "../types/store";
+import { geocodingAPI } from "../API/GeocodingAPI";
+import { oneCallAPI } from "../API/OneCallAPI";
 
 interface CurrentWeatherDataState {
-  info: CurrentWeatherDataResponse;
+  info: General;
+  name: string;
   loading: boolean;
   error: null | string;
   fetchCurrentWeatherData: (latitude: number, longitude: number) => void;
@@ -16,51 +18,40 @@ export const useCurrentWeatherData = create(
     persist(
       immer<CurrentWeatherDataState>((set) => ({
         info: {
-          coord: {
-            lon: 0,
-            lat: 0,
-          },
-          weather: [
-            {
-              id: 0,
-              main: "",
-              description: "",
-              icon: "",
-            },
-          ],
-          base: "",
-          main: {
-            temp: 0,
-            feels_like: 0,
-            temp_min: 0,
-            temp_max: 0,
-            pressure: 0,
-            humidity: 0,
-            sea_level: 0,
-            grnd_level: 0,
-          },
-          visibility: 0,
-          wind: {
-            speed: 0,
-            deg: 0,
-            gust: 0,
-          },
-          clouds: {
-            all: 0,
-          },
-          dt: 0,
-          sys: {
-            type: 0,
-            id: 0,
-            country: "",
+          lat: 0,
+          lon: 0,
+          timezone: "string",
+          timezone_offset: 0,
+          current: {
+            dt: 0,
             sunrise: 0,
             sunset: 0,
+            temp: 0,
+            feels_like: 0,
+            pressure: 0,
+            humidity: 0,
+            dew_point: 0,
+            uvi: 0,
+            clouds: 0,
+            visibility: 0,
+            wind_speed: 0,
+            wind_deg: 0,
+            wind_gust: 0,
+            weather: [
+              {
+                id: 0,
+                main: "string",
+                description: "string",
+                icon: "string",
+              },
+            ],
           },
-          timezone: 0,
-          id: 0,
-          name: "",
-          cod: 0,
+          // minutely: [],
+          hourly: [],
+          daily: [],
+          alerts: [],
         },
+        name: "",
         loading: false,
         error: null,
         fetchCurrentWeatherData: async (
@@ -69,18 +60,13 @@ export const useCurrentWeatherData = create(
         ) => {
           set({ loading: true });
           try {
-            const response = await axios<CurrentWeatherDataResponse>({
-              url: "https://api.openweathermap.org/data/2.5/weather",
-              params: {
-                lat: latitude,
-                lon: longitude,
-                units: "metric",
-                lang: "ru",
-                appid: import.meta.env.VITE_API_KEY,
-              },
-              timeout: 10000,
+            const responseOneCallAPI = await oneCallAPI(latitude, longitude);
+            const responseGeocoding = await geocodingAPI(latitude, longitude);
+            set({
+              info: responseOneCallAPI.data,
+              name: responseGeocoding.data[0].local_names.ru,
+              error: null,
             });
-            set({ info: response.data, error: null });
           } catch (error) {
             let message = "Unknown Error";
             if (error instanceof Error) message = error.message;

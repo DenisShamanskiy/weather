@@ -5,7 +5,7 @@ import { daysWeekLong, monthNames } from "../utils/constants";
 import { getIcon } from "../utils/functions";
 
 function Title() {
-  const currentWeatherData = useCurrentWeatherData((state) => state.info);
+  const currentWeatherData = useCurrentWeatherData((state) => state);
 
   return (
     <Box
@@ -18,7 +18,7 @@ function Title() {
     >
       <Box>
         <Image
-          src={getIcon(currentWeatherData.weather[0].icon)}
+          src={getIcon(currentWeatherData.info.current.weather[0].icon)}
           alt="Dan Abramov"
           w="60px"
           mx="auto"
@@ -28,11 +28,11 @@ function Title() {
           rounded="full"
         />
         <Text textAlign="center" color="white" mt={6}>
-          {currentWeatherData.weather[0].description}
+          {currentWeatherData.info.current.weather[0].description}
         </Text>
       </Box>
       <Text fontSize="9xl" color="white">
-        {Math.floor(currentWeatherData.main.temp)}°
+        {Math.round(currentWeatherData.info.current.temp)}°
       </Text>
       <Box>
         <Text fontSize="6xl" color="white">

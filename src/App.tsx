@@ -6,7 +6,6 @@ import WeatherCardRight from "./components/WeatherCardRight";
 import WeatherCardLeft from "./components/WeatherCardLeft";
 import { useCurrentWeatherData } from "./store/CurrentWeatherData";
 import { useCurrentCoordinates } from "./hook/useCurrentCoordinates";
-import formate from "./service";
 
 function App() {
   const { getCurrentCoordinates } = useCurrentCoordinates();
@@ -19,24 +18,24 @@ function App() {
     shallow
   );
 
-  console.log(new Date().getDay());
+  // console.log(new Date().getDay());
 
-  console.log(formate.dayWeek(Number(new Date())));
+  // console.log(formate.dayWeek(Number(new Date())));
 
-  const getCurrentWeatherData = async () => {
-    try {
-      const position = await getCurrentCoordinates();
-      if (position) {
-        await fetchCurrentWeatherData(position.latitude, position.longitude);
-      }
-      console.log("getCurrentWeatherData отработала успешно");
-    } catch (error) {
-      console.error("Ошибка получения координат:", error);
-    }
-  };
+  // const getCurrentWeatherData = async () => {
+  //   try {
+  //     const position = await getCurrentCoordinates();
+  //     if (position) {
+  //       await fetchCurrentWeatherData(position.latitude, position.longitude);
+  //     }
+  //     console.log("getCurrentWeatherData отработала успешно");
+  //   } catch (error) {
+  //     console.error("Ошибка получения координат:", error);
+  //   }
+  // };
 
   useEffect(() => {
-    getCurrentWeatherData();
+    // getCurrentWeatherData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -48,10 +47,10 @@ function App() {
       display="flex"
       maxWidth="1280px"
       bgImg={"src/assets/andrew-neel-unsplash.jpg"}
-      bgSize="contain"
+      bgSize="cover"
       shadow="2xl"
     >
-      <Grid w="100%" templateColumns="repeat(3, 1fr)">
+      <Grid w="100%" templateColumns="repeat(12, 1fr)">
         <WeatherCardLeft />
         <WeatherCardRight />
       </Grid>
