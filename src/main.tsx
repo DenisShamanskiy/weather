@@ -12,7 +12,7 @@ const theme = extendTheme({
         display: "none",
       },
       body: {
-        backgroundImage: "url('src/assets/andrew-neel-unsplash.jpg')",
+        backgroundImage: "url('/andrew-neel-unsplash.jpg')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",

@@ -3,7 +3,7 @@ import { ResponseReverseGeocoding } from "../types/store";
 
 export const geocodingAPI = async (latitude: number, longitude: number) => {
   return axios<ResponseReverseGeocoding>({
-    url: "http://api.openweathermap.org/geo/1.0/reverse",
+    url: "https://api.openweathermap.org/geo/1.0/reverse",
     params: {
       lat: latitude,
       lon: longitude,
