@@ -1,10 +1,12 @@
 import { Flex, GridItem, Text } from "@chakra-ui/react";
+
 import icon_logo from "../../assets/logo.svg";
 import icon_email from "../../assets/mail.svg";
 import icon_github from "../../assets/github.svg";
 import icon_linkedin from "../../assets/linkedin.svg";
 import icon_telegram from "../../assets/telegram.svg";
-import FooterLink from "./FooterLink";
+import FooterLinkIcon from "./FooterLinkIcon";
+import FooterLinkIconText from "./FooterLinkIconText";
 
 const Footer = () => {
   return (
@@ -26,36 +28,43 @@ const Footer = () => {
       <Flex
         display="inline-flex"
         flexDirection={{ base: "column", md: "row" }}
-        justifyContent="center"
-        gap={2}
+        justifyContent={{ base: "center", md: "space-between" }}
+        alignItems={{ base: "flex-start", md: "center" }}
+        rowGap={4}
         columnGap={{ md: 8 }}
       >
-        <FooterLink icon={icon_logo} href={"https://www.denis-shamansky.com/"}>
+        <FooterLinkIconText
+          icon={icon_logo}
+          href={"https://www.denis-shamansky.com/"}
+        >
           Денис Шаманский
-        </FooterLink>
-        <FooterLink icon={icon_email} href={"mailto:d.g.shaman@yandex.ru"}>
+        </FooterLinkIconText>
+        <FooterLinkIconText
+          icon={icon_email}
+          href={"mailto:d.g.shaman@yandex.ru"}
+        >
           d.g.shaman@yandex.ru
-        </FooterLink>
+        </FooterLinkIconText>
       </Flex>
       <Flex
         display="inline-flex"
         flexDirection={{ base: "column", md: "row" }}
-        justifyContent="center"
-        gap={2}
+        justifyContent={{ base: "center", md: "space-between" }}
+        rowGap={4}
       >
-        <Text fontSize="2xl" visibility={{ md: "hidden" }}>
+        <Text textAlign="end" display={{ md: "none" }}>
           Медиа
         </Text>
         <Flex gap={2}>
-          <FooterLink
+          <FooterLinkIcon
             icon={icon_telegram}
             href={"https://t.me/Denis_Shamanskiy"}
           />
-          <FooterLink
+          <FooterLinkIcon
             icon={icon_github}
             href={"https://github.com/DenisShamanskiy"}
           />
-          <FooterLink
+          <FooterLinkIcon
             icon={icon_linkedin}
             href={"https://www.linkedin.com/in/denis-shamanskiy/"}
           />

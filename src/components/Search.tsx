@@ -24,7 +24,7 @@ const Search = () => {
       <Input
         focusBorderColor="teal.500"
         variant="flushed"
-        placeholder="Поиск"
+        placeholder="in progress..."
         _placeholder={{ color: "rgba(255,255,255, 0.2)" }}
         size="lg"
         mr={5}

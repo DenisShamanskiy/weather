@@ -6,7 +6,7 @@ type Props = {
   children?: string;
 };
 
-const FooterLink = ({ icon, href, children }: Props) => {
+const FooterLinkIcon = ({ icon, href, children }: Props) => {
   return (
     <Link
       isExternal
@@ -25,4 +25,4 @@ const FooterLink = ({ icon, href, children }: Props) => {
   );
 };
 
-export default FooterLink;
+export default FooterLinkIcon;
