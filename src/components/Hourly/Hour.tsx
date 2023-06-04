@@ -25,10 +25,11 @@ const Hour = ({ dt, temp, weather }: Props) => {
     <ListItem
       border={1}
       p={1}
-      bg={"rgba(255,255,255, 0.1)"}
+      bg={"rgba(100,100,100, 0.2)"}
       backdropFilter="auto"
       backdropBlur={"4px"}
       minWidth="65px"
+      boxShadow="base"
     >
       <Text
         borderBottom="1px"
@@ -39,7 +40,11 @@ const Hour = ({ dt, temp, weather }: Props) => {
         {formate.time(dt, timezone_offset)}
       </Text>
       <Box m={2}>
-        <Image src={getIcon(weather[0].icon)} alt="Dan Abramov" w="full" />
+        <Image
+          src={getIcon(weather[0].icon)}
+          alt={`${weather[0].main} ${"icon"}`}
+          w="12"
+        />
       </Box>
       <Text textAlign="center" fontSize="xl" color="#f9fbfc">
         {Math.round(temp)}°

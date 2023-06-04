@@ -1,4 +1,4 @@
-import { UnorderedList } from "@chakra-ui/react";
+import { GridItem, UnorderedList } from "@chakra-ui/react";
 import Hour from "./Hour";
 import { useHorizontalScroll } from "../../hook/useHorizontalScroll";
 import { useCurrentWeatherData } from "../../store/CurrentWeatherData";
@@ -8,24 +8,40 @@ const Hourly = () => {
   const hourly = useCurrentWeatherData((state) => state.info.hourly);
 
   return (
-    <UnorderedList
-      listStyleType="none"
+    <GridItem
+      colStart={1}
+      colEnd={{ base: 2, md: 9 }}
+      rowStart={{ base: 4, md: 4 }}
+      rowEnd={{ base: 5, md: 7 }}
       display="flex"
-      gap={4}
+      flexDirection="column"
+      mt="auto"
       w="full"
-      m={0}
-      pt={12}
-      borderTop="1px"
-      borderColor="rgba(255,255,255, 0.2)"
-      color="white"
-      overflow="hidden"
-      scrollBehavior="smooth"
-      ref={containerRef}
+      alignItems="end"
+      px={{ base: 4, md: 0 }}
+      gap={12}
     >
-      {hourly.slice(1, 25).map(({ dt, temp, weather }, index) => (
-        <Hour key={index} dt={dt} temp={temp} weather={weather} />
-      ))}
-    </UnorderedList>
+      <UnorderedList
+        listStyleType="none"
+        m={0}
+        display="flex"
+        gap={4}
+        w="full"
+        pt={{ base: 8, md: 12 }}
+        pb={{ base: 8, md: 0 }}
+        borderTop="1px"
+        borderBottom={{ base: "1px", md: "none" }}
+        borderColor="rgba(255,255,255, 0.2)"
+        color="white"
+        overflow="hidden"
+        scrollBehavior="smooth"
+        ref={containerRef}
+      >
+        {hourly.slice(1, 25).map(({ dt, temp, weather }, index) => (
+          <Hour key={index} dt={dt} temp={temp} weather={weather} />
+        ))}
+      </UnorderedList>
+    </GridItem>
   );
 };
 

@@ -1,14 +1,25 @@
-import { Box, Button, Input } from "@chakra-ui/react";
+import { Button, GridItem, Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
-function Search() {
+const Search = () => {
   return (
-    <Box
-      m={5}
+    <GridItem
+      colStart={{ base: 1, md: 9 }}
+      colEnd={{ base: 1, md: 13 }}
+      rowStart={{ base: 2, md: 1 }}
+      rowEnd={2}
+      w="100%"
+      maxW="420px"
+      mt="auto"
+      minW={{ md: "340px" }}
+      p={5}
+      bg={"rgba(100,100,100, 0.2)"}
+      backdropFilter="auto"
+      backdropBlur="8px"
       display="flex"
-      justifyContent="center"
-      alignItems="center"
-      boxSizing="border-box"
+      justifyContent="space-between"
+      justifySelf="center"
+      boxShadow="base"
     >
       <Input
         focusBorderColor="teal.500"
@@ -32,8 +43,8 @@ function Search() {
       >
         <SearchIcon />
       </Button>
-    </Box>
+    </GridItem>
   );
-}
+};
 
 export default Search;

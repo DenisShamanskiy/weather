@@ -16,13 +16,24 @@ type Props = {
   ];
 };
 
-const Hour = ({ dt, min, max, weather }: Props) => {
+const Day = ({ dt, min, max, weather }: Props) => {
   return (
-    <ListItem display="flex" w="full" h="12">
+    <ListItem
+      display="flex"
+      w="full"
+      minHeight="65px"
+      backdropFilter="auto"
+      backdropBlur={"8px"}
+      bg={"rgba(100,100,100, 0.2)"}
+      p={1}
+      boxShadow="base"
+    >
       <Image
         src={getIcon(weather[0].icon)}
         alt={`${weather[0].main} ${"icon"}`}
-        w="12"
+        w={10}
+        h={10}
+        m={2}
       />
       <Box
         display="flex"
@@ -31,9 +42,12 @@ const Hour = ({ dt, min, max, weather }: Props) => {
         mx={5}
         overflowX="hidden"
       >
-        <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
-          {formate.dayWeekLong(dt)}
-        </Text>
+        <Box display="inline-flex" gap={1}>
+          <Text whiteSpace="nowrap">{formate.dayWeekLong(dt)}</Text>
+          <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+            {formate.dayAndMonth(dt)}
+          </Text>
+        </Box>
         <Text
           fontSize="xs"
           overflow="hidden"
@@ -46,8 +60,10 @@ const Hour = ({ dt, min, max, weather }: Props) => {
       <Box
         borderLeft="1px"
         borderColor="rgba(255,255,255, 0.2)"
-        pl={5}
+        pl={{ base: 5, md: 2 }}
+        pr={{ base: 4, md: 0 }}
         ml="auto"
+        my="auto"
         whiteSpace="nowrap"
       >
         <Text textAlign="center" w="8">
@@ -61,4 +77,4 @@ const Hour = ({ dt, min, max, weather }: Props) => {
   );
 };
 
-export default Hour;
+export default Day;

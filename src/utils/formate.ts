@@ -18,6 +18,13 @@ class Formate {
     return `${date} ${monthNames[new Date(time * 1000).getMonth()]}`;
   }
 
+  // Метод возвращает число и месяц - ("1 января")
+  dayAndMonth = (data: number): string => {
+    const dayMonth = new Date(data * 1000).getDate();
+    const month = monthNames[new Date(data * 1000).getMonth()];
+    return `${dayMonth} ${month}`;
+  };
+
   // Метод возвращает КРАТКОЕ наименование дня недели - ("Пн")
   dayWeek = (data: number) => daysWeek[new Date(data * 1000).getDay()];
 

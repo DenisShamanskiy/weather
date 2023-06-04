@@ -1,33 +1,43 @@
-import { UnorderedList } from "@chakra-ui/react";
-import Day from "./Day";
+import { GridItem, UnorderedList } from "@chakra-ui/react";
 import { useCurrentWeatherData } from "../../store/CurrentWeatherData";
+import Day from "./Day";
 
 const Daily = () => {
   const daily = useCurrentWeatherData((state) => state.info.daily);
-  console.log(daily);
 
   return (
-    <UnorderedList
-      color="white"
-      gap={4}
-      listStyleType="none"
-      m={5}
+    <GridItem
+      w="100%"
+      maxW="420px"
+      colStart={{ base: 1, md: 9 }}
+      colEnd={{ base: 2, md: 13 }}
+      rowStart={{ base: 5, md: 3 }}
+      rowEnd={{ base: 6, md: 7 }}
       display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      overflowX="hidden"
+      justifySelf="center"
     >
-      {daily.slice(1).map(({ dt, temp: { min, max }, weather }, index) => (
-        <Day key={index} dt={dt} min={min} max={max} weather={weather} />
-      ))}
-
-      {/* <Day />
-      <Day />
-      <Day />
-      <Day />
-      <Day /> */}
-    </UnorderedList>
+      <UnorderedList
+        listStyleType="none"
+        display="flex"
+        gap={4}
+        w="full"
+        m={0}
+        flexDirection="column"
+        justifyContent="space-between"
+        color="white"
+        overflowY="scroll"
+        scrollBehavior="smooth"
+        __css={{
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+        }}
+      >
+        {daily.slice(1).map(({ dt, temp: { min, max }, weather }, index) => (
+          <Day key={index} dt={dt} min={min} max={max} weather={weather} />
+        ))}
+      </UnorderedList>
+    </GridItem>
   );
 };
 
