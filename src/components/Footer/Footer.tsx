@@ -1,4 +1,4 @@
-import { Flex, GridItem, Text } from "@chakra-ui/react";
+import { Flex, GridItem } from "@chakra-ui/react";
 
 import icon_logo from "../../assets/logo.svg";
 import icon_email from "../../assets/mail.svg";
