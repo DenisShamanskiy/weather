@@ -46,29 +46,19 @@ const Footer = () => {
           d.g.shaman@yandex.ru
         </FooterLinkIconText>
       </Flex>
-      <Flex
-        display="inline-flex"
-        flexDirection={{ base: "column", md: "row" }}
-        justifyContent={{ base: "center", md: "space-between" }}
-        rowGap={4}
-      >
-        <Text textAlign="end" display={{ md: "none" }}>
-          Медиа
-        </Text>
-        <Flex gap={2}>
-          <FooterLinkIcon
-            icon={icon_telegram}
-            href={"https://t.me/Denis_Shamanskiy"}
-          />
-          <FooterLinkIcon
-            icon={icon_github}
-            href={"https://github.com/DenisShamanskiy"}
-          />
-          <FooterLinkIcon
-            icon={icon_linkedin}
-            href={"https://www.linkedin.com/in/denis-shamanskiy/"}
-          />
-        </Flex>
+      <Flex gap={2}>
+        <FooterLinkIcon
+          icon={icon_telegram}
+          href={"https://t.me/Denis_Shamanskiy"}
+        />
+        <FooterLinkIcon
+          icon={icon_github}
+          href={"https://github.com/DenisShamanskiy"}
+        />
+        <FooterLinkIcon
+          icon={icon_linkedin}
+          href={"https://www.linkedin.com/in/denis-shamanskiy/"}
+        />
       </Flex>
     </GridItem>
   );

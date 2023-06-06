@@ -33,7 +33,7 @@ const Hourly = () => {
         borderBottom={{ base: "1px", md: "none" }}
         borderColor="rgba(255,255,255, 0.2)"
         color="white"
-        overflow="hidden"
+        overflowX="auto"
         scrollBehavior="smooth"
         ref={containerRef}
       >
